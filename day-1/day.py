@@ -20,8 +20,6 @@ print('Total number of increases: {}'.format(count))
 # Part Two
 
 
-
-
 def window(list, window_size):      # Implement sliding window funciton
     window_count = 0
     wd = 0
