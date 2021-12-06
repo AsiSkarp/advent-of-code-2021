@@ -1,9 +1,8 @@
-with open('bingo_input.txt') as f:
+with open('test.txt') as f:
     lines = f.readlines()
 
 #  Part One
 
-#  Loading the game:
 
 def load_bingo_numbers(strings):
     drawn_numbers = []
@@ -13,7 +12,6 @@ def load_bingo_numbers(strings):
         else:
             row = line.strip().split(',')
             drawn_numbers.append(parse_string_to_int(row))
-            #drawn_numbers.append(line.strip().split(','))
 
 
 def load_bingo_cards(strings, start_index):
@@ -64,28 +62,21 @@ def print_game(numbers, bingo_cards):
 
 def mark_number(bingo_card, bingo_number):
     for i, row in enumerate(bingo_card):
-        #print("Checking number: {} \t in row #{}".format(bingo_number, i))
-        #print(row)
         for j, number in enumerate(row):
             if number == bingo_number:
-                #print('Number: {} is a match at row {} column {}'.format(number, i + 1, j + 1))
                 bingo_card[i][j] = 'X'
-
 
 
 def check_matches(bingo_card):
     bingo = False
     for i, row in enumerate(bingo_card):
         bingo = check_row(row)
-        #print("Bingo in row? {}".format(bingo))
         if bingo:
             break
         bingo = check_column(bingo_card, i)
-        #print("Bingo in column? {}".format(bingo))
         if bingo:
             break
     return bingo    
-
 
 
 def check_row(row):
@@ -107,19 +98,9 @@ def calculate_score(bingo_card, bingo_number):
 
 
 def play_bingo(bingo_cards, numbers):
-    # bingo = False
     for ind, number in enumerate(numbers[0]):
         for iteration, card in enumerate(bingo_cards):
             mark_number(card, number)
-            '''
-            bingo = check_matches(card)
-            if bingo:
-                print('BINGO!')
-                print_game(numbers, bingo_cards)
-                break    
-            '''
-            #print("Checking card #{}".format(iteration + 1))
-            #print("Bingo?: {}".format(check_matches(card)))
             bingo = check_matches(card)
             
             if bingo:
@@ -130,7 +111,6 @@ def play_bingo(bingo_cards, numbers):
         
         if bingo:
             print("----FINAL RESULT ----")
-            #print_game(numbers, bingo_cards)
             break
         print("\n")
         print("Round #{}".format(ind + 1))
@@ -140,11 +120,11 @@ def play_bingo(bingo_cards, numbers):
 
 
 numbers, bingo_cards = load_game(lines)
-
-#print_game(numbers, bingo_cards)
-
 play_bingo(bingo_cards, numbers)
-#print(load_bingo_numbers(lines))
-# print(load_bingo_cards(lines, 8))
+
+
+# Part Two
+
+
 
 
